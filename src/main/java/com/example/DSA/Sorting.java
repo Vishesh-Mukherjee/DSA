@@ -1,5 +1,6 @@
 package com.example.DSA;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -47,5 +48,53 @@ public class Sorting {
             list.set(j+1, temp);
         }
         return list;
+    }
+
+    public List<Integer> mergeSort(List<Integer> list) {
+        mergeSortDivide(list);
+        return list;
+    }
+
+    private void mergeSortDivide(List<Integer> list) {
+        if (list.size() <= 1) {
+            return;
+        }
+        int n = list.size();
+        int mid = n/2;
+        List<Integer> leftList = new ArrayList<>();
+        for (int i = 0; i < mid; i ++) {
+            leftList.add(list.get(i));
+        }
+        mergeSortDivide(leftList);
+        List<Integer> rightList = new ArrayList<>();
+        for (int i = mid; i < n; i ++) {
+            rightList.add(list.get(i));
+        }
+        mergeSortDivide(rightList);
+        mergeSortConquer(list, leftList, rightList);
+    }
+
+    private void mergeSortConquer(List<Integer> list, List<Integer> leftList, List<Integer> rightList) {
+        int i = 0, j = 0, k = 0;
+        while (i < leftList.size() && j < rightList.size()) {
+            if (leftList.get(i) < rightList.get(j)) {
+                list.set(k, leftList.get(i));
+                i ++;
+            } else {
+                list.set(k, rightList.get(j));
+                j ++;
+            }
+            k ++;
+        }
+        while (i < leftList.size()) {
+            list.set(k, leftList.get(i));
+            i ++;
+            k ++;
+        }
+        while (j < rightList.size()) {
+            list.set(k, rightList.get(j));
+            j ++;
+            k ++;
+        }
     }
 }
