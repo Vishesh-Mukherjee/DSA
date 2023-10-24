@@ -14,4 +14,19 @@ public class Searching {
         return -1;
     }
 
+    public int binarySearch(List<Integer> list, int ele) {
+        int left = 0, right = list.size()-1;
+        while (left <= right) {
+            int mid = (left+right)/2;
+            int midEle = list.get(mid);
+            if (midEle == ele) {
+                return mid;
+            } else if (ele < midEle) {
+                right = mid-1;
+            } else {
+                left = mid+1;
+            }
+        }
+        return -1;
+    }
 }
