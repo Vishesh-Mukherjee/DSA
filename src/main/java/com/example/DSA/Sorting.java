@@ -97,4 +97,29 @@ public class Sorting {
             k ++;
         }
     }
+
+    public List<Integer> quickSort(List<Integer> list) {
+        quickSortDivide(list, 0, list.size()-1);
+        return list;
+    }
+
+    public void quickSortDivide(List<Integer> list, int left, int right) {
+        if (left >= right) {
+            return;
+        }
+        int index = quickSortConquer(list, left, right);
+        quickSortDivide(list, left, index-1);
+        quickSortDivide(list, index+1, right);
+    }
+
+    public int quickSortConquer(List<Integer> list, int left, int right) {
+        int i = left;
+        for (int j = left; j <= right; j ++) {
+            if (list.get(j) <= list.get(right)) {
+                Collections.swap(list, i, j);
+                i ++;
+            }
+        }
+        return i-1;
+    }
 }
