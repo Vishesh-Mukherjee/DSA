@@ -55,4 +55,24 @@ public class SortingTest {
     void selectionSortRandom() {
         assertThat(sort.selectionSort(Arrays.asList(1, 5, 2, 4, 3))).isEqualTo(Arrays.asList(1, 2, 3, 4, 5));
     }
+
+    @Test
+    void insertionSortAscending() {
+        assertThat(sort.insertionSort(Arrays.asList(1, 2, 3, 4, 5))).isEqualTo(Arrays.asList(1, 2, 3, 4, 5));
+    }
+
+    @Test
+    void insertionSortDescending() {
+        assertThat(sort.insertionSort(Arrays.asList(5, 4, 3, 2, 1))).isEqualTo(Arrays.asList(1, 2, 3, 4, 5));
+    }
+
+    @Test
+    void insertionSortEmpty() {
+        assertThat(Arrays.asList()).isEqualTo(Arrays.asList());
+    }
+
+    @Test
+    void insertionSortRandom() {
+        assertThat(sort.selectionSort(Arrays.asList(1, 5, 2, 4, 3))).isEqualTo(Arrays.asList(1, 2, 3, 4, 5));
+    }
 }

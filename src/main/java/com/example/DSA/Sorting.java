@@ -17,7 +17,6 @@ public class Sorting {
         return list;
     }        
 
-
     public List<Integer> selectionSort(List<Integer> list) {
         int n = list.size();
         for (int i = 0; i < n; i ++) {
@@ -28,6 +27,24 @@ public class Sorting {
                 }
             }
             Collections.swap(list, i, min_index);
+        }
+        return list;
+    }
+
+    public List<Integer> insertionSort(List<Integer> list) {
+        int n = list.size();
+        for (int i = 1; i < n; i ++) {
+            int temp = list.get(i);
+            int j = i-1;
+            while(j >= 0) {
+                if (list.get(j) > temp) {
+                    list.set(j+1, list.get(j));
+                } else {
+                    break;
+                }
+                j --;
+            }
+            list.set(j+1, temp);
         }
         return list;
     }
