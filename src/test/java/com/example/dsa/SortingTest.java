@@ -1,4 +1,4 @@
-package com.example.DSA;
+package com.example.dsa;
 
 import static org.assertj.core.api.Assertions.*;
 
@@ -11,7 +11,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
-public class SortingTest {
+class SortingTest {
     
     Sorting sorting;
 

@@ -1,4 +1,4 @@
-package com.example.DSA;
+package com.example.dsa;
 
 import java.util.List;
 
@@ -15,7 +15,8 @@ public class Searching {
     }
 
     public int binarySearch(List<Integer> list, int ele) {
-        int left = 0, right = list.size()-1;
+        int left = 0;
+        int right = list.size()-1;
         while (left <= right) {
             int mid = (left+right)/2;
             int midEle = list.get(mid);

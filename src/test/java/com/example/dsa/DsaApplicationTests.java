@@ -1,4 +1,4 @@
-package com.example.DSA;
+package com.example.dsa;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

@@ -1,4 +1,4 @@
-package com.example.DSA;
+package com.example.dsa;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -8,7 +8,7 @@ import static org.assertj.core.api.Assertions.*;
 import java.util.Arrays;
 import java.util.List;
 
-public class SearchingTest {
+class SearchingTest {
 
     Searching searching;
 

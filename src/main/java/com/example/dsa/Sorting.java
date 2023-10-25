@@ -1,4 +1,4 @@
-package com.example.DSA;
+package com.example.dsa;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -21,13 +21,13 @@ public class Sorting {
     public List<Integer> selectionSort(List<Integer> list) {
         int n = list.size();
         for (int i = 0; i < n; i ++) {
-            int min_index = i;
+            int minIndex = i;
             for (int j = i; j < n; j ++) {
-                if (list.get(j) < list.get(min_index)) {
-                    min_index = j;
+                if (list.get(j) < list.get(minIndex)) {
+                    minIndex = j;
                 }
             }
-            Collections.swap(list, i, min_index);
+            Collections.swap(list, i, minIndex);
         }
         return list;
     }
@@ -75,7 +75,9 @@ public class Sorting {
     }
 
     private void mergeSortConquer(List<Integer> list, List<Integer> leftList, List<Integer> rightList) {
-        int i = 0, j = 0, k = 0;
+        int i = 0;
+        int j = 0;
+        int k = 0;
         while (i < leftList.size() && j < rightList.size()) {
             if (leftList.get(i) < rightList.get(j)) {
                 list.set(k, leftList.get(i));
