@@ -1,12 +1,16 @@
 package com.example.DSA;
 
+import static org.assertj.core.api.Assertions.*;
+
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Stream;
+import java.util.Collections;
 
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-
-import static org.assertj.core.api.Assertions.*;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 
 public class LinkedListTest {
 
@@ -17,42 +21,27 @@ public class LinkedListTest {
         linkedList = new LinkedList();
     }
 
-    @Test
-    void addMany() {
-        List<Integer> list = Arrays.asList(1, 2, 3, 4, 5);
-        linkedList.addAll(list);
-        assertThat(linkedList.toList()).isEqualTo(list);
+    @ParameterizedTest
+    @MethodSource("generateRandomList")
+    void testAdd(List<Integer> randomList) {
+        linkedList.addAll(randomList);
+        assertThat(linkedList.toList()).isEqualTo(randomList);
     }
 
-    @Test
-    void addNone() {
-        assertThat(linkedList.toList()).isEqualTo(Arrays.asList());
-    }
-
-    @Test
-    void addOne() {
-        List<Integer> list = Arrays.asList(1);
-        linkedList.addAll(list);
-        assertThat(linkedList.toList()).isEqualTo(list);
-    }
-
-    @Test
-    void reverseMany() {
-        linkedList.addAll(Arrays.asList(1, 2, 3, 4, 5));
+    @ParameterizedTest
+    @MethodSource("generateRandomList")
+    void testReverse(List<Integer> randomList) {
+        linkedList.addAll(randomList);
         linkedList.reverse();
-        assertThat(linkedList.toList()).isEqualTo(Arrays.asList(5, 4, 3, 2, 1));
+        Collections.reverse(randomList);
+        assertThat(linkedList.toList()).isEqualTo(randomList);
     }
 
-    @Test
-    void reverseOne() {
-        linkedList.addAll(Arrays.asList(1));
-        linkedList.reverse();
-        assertThat(linkedList.toList()).isEqualTo(Arrays.asList(1));
-    }
-
-    @Test
-    void reverseNone() {
-        linkedList.reverse();
-        assertThat(linkedList.toList()).isEqualTo(Arrays.asList());
+    static Stream<Arguments> generateRandomList() {
+        return Stream.of(
+            Arguments.of(Arrays.asList()),
+            Arguments.of(Arrays.asList(1)),
+            Arguments.of(Arrays.asList(1, 2, 3, 4, 5))
+        );
     }
 }
