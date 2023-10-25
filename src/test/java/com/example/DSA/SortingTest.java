@@ -3,9 +3,13 @@ package com.example.DSA;
 import static org.assertj.core.api.Assertions.*;
 
 import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Stream;
 
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 
 public class SortingTest {
     
@@ -16,103 +20,53 @@ public class SortingTest {
         sorting = new Sorting();
     }
 
-    @Test
-    void bubbleSortAscending() {
-        assertThat(sorting.bubbleSort(Arrays.asList(1, 2, 3, 4, 5))).isEqualTo(Arrays.asList(1, 2, 3, 4, 5));
+    @ParameterizedTest
+    @MethodSource("generateRandomList")
+    void testBubbleSort(List<Integer> randomList) {
+        assertThat(sorting.bubbleSort(randomList)).isSorted();
     }
 
-    @Test
-    void bubbleSortDescending() {
-        assertThat(sorting.bubbleSort(Arrays.asList(5, 4, 3, 2, 1))).isEqualTo(Arrays.asList(1, 2, 3, 4, 5));
+    @ParameterizedTest
+    @MethodSource("generateRandomList")
+    void testSelectionSort(List<Integer> randomList) {
+        assertThat(sorting.selectionSort(randomList)).isSorted();
     }
 
-    @Test
-    void bubbleSortEmpty() {
-        assertThat(sorting.bubbleSort(Arrays.asList())).isEqualTo(Arrays.asList());
+    @ParameterizedTest
+    @MethodSource("generateRandomList")
+    void testInsertionSort(List<Integer> randomList) {
+        assertThat(sorting.insertionSort(randomList)).isSorted();
     }
 
-    @Test
-    void bubbleSortRandom() {
-        assertThat(sorting.bubbleSort(Arrays.asList(1, 5, 2, 4, 3))).isEqualTo(Arrays.asList(1, 2, 3, 4, 5));
+    @ParameterizedTest
+    @MethodSource("generateRandomList")
+    void testMergeSort(List<Integer> randomList) {
+        assertThat(sorting.mergeSort(randomList)).isSorted();
     }
 
-    @Test
-    void selectionSortAscending() {
-        assertThat(sorting.selectionSort(Arrays.asList(1, 2, 3, 4, 5))).isEqualTo(Arrays.asList(1, 2, 3, 4, 5));
+    @ParameterizedTest
+    @MethodSource("generateRandomList")
+    void testQuickSort(List<Integer> randomList) {
+        assertThat(sorting.quickSort(randomList)).isSorted();
     }
 
-    @Test
-    void selectionSortDescending() {
-        assertThat(sorting.selectionSort(Arrays.asList(5, 4, 3, 2, 1))).isEqualTo(Arrays.asList(1, 2, 3, 4, 5));
-    }
-
-    @Test
-    void selectionSortEmpty() {
-        assertThat(sorting.selectionSort(Arrays.asList())).isEqualTo(Arrays.asList());
-    }
-
-    @Test
-    void selectionSortRandom() {
-        assertThat(sorting.selectionSort(Arrays.asList(1, 5, 2, 4, 3))).isEqualTo(Arrays.asList(1, 2, 3, 4, 5));
-    }
-
-    @Test
-    void insertionSortAscending() {
-        assertThat(sorting.insertionSort(Arrays.asList(1, 2, 3, 4, 5))).isEqualTo(Arrays.asList(1, 2, 3, 4, 5));
-    }
-
-    @Test
-    void insertionSortDescending() {
-        assertThat(sorting.insertionSort(Arrays.asList(5, 4, 3, 2, 1))).isEqualTo(Arrays.asList(1, 2, 3, 4, 5));
-    }
-
-    @Test
-    void insertionSortEmpty() {
-        assertThat(sorting.insertionSort(Arrays.asList())).isEqualTo(Arrays.asList());
-    }
-
-    @Test
-    void insertionSortRandom() {
-        assertThat(sorting.insertionSort(Arrays.asList(1, 5, 2, 4, 3))).isEqualTo(Arrays.asList(1, 2, 3, 4, 5));
-    }
-
-    @Test
-    void mergeSortAscending() {
-        assertThat(sorting.mergeSort(Arrays.asList(1, 2, 3, 4, 5))).isEqualTo(Arrays.asList(1, 2, 3, 4, 5));
-    }
-
-    @Test
-    void mergeSortDescending() {
-        assertThat(sorting.mergeSort(Arrays.asList(5, 4, 3, 2, 1))).isEqualTo(Arrays.asList(1, 2, 3, 4, 5));
-    }
-
-    @Test
-    void mergeSortEmpty() {
-        assertThat(sorting.mergeSort(Arrays.asList())).isEqualTo(Arrays.asList());
-    }
-
-    @Test
-    void mergeSortRandom() {
-        assertThat(sorting.mergeSort(Arrays.asList(1, 5, 2, 4, 3))).isEqualTo(Arrays.asList(1, 2, 3, 4, 5));
-    }
-
-    @Test
-    void quickSortAscending() {
-        assertThat(sorting.quickSort(Arrays.asList(1, 2, 3, 4, 5))).isEqualTo(Arrays.asList(1, 2, 3, 4, 5));
-    }
-
-    @Test
-    void quickSortDescending() {
-        assertThat(sorting.quickSort(Arrays.asList(5, 4, 3, 2, 1))).isEqualTo(Arrays.asList(1, 2, 3, 4, 5));
-    }
-
-    @Test
-    void quickSortEmpty() {
-        assertThat(sorting.quickSort(Arrays.asList())).isEqualTo(Arrays.asList());
-    }
-
-    @Test
-    void quickSortRandom() {
-        assertThat(sorting.quickSort(Arrays.asList(1, 5, 2, 4, 3))).isEqualTo(Arrays.asList(1, 2, 3, 4, 5));
+    static Stream<Arguments> generateRandomList() {
+        return Stream.of(
+            Arguments.of(Arrays.asList()),
+            Arguments.of(Arrays.asList(1)),
+            Arguments.of(Arrays.asList(-1)),
+            Arguments.of(Arrays.asList(1, 2, 3, 4, 5)),
+            Arguments.of(Arrays.asList(5, 4, 3, 2, 1)),
+            Arguments.of(Arrays.asList(1, 5, 2, 4, 3)),
+            Arguments.of(Arrays.asList(-1, -2, -3, -4, -5)),
+            Arguments.of(Arrays.asList(-5, -4, -3, -2, -1)),
+            Arguments.of(Arrays.asList(-1, -5, -2, -4, -3)),
+            Arguments.of(Arrays.asList(1, -2, 3, -4, 5)),
+            Arguments.of(Arrays.asList(5, -4, 3, -2, 1)),
+            Arguments.of(Arrays.asList(1, -5, 2, -4, 3)),
+            Arguments.of(Arrays.asList(1, 2, -3, 4, 5, -1, 2, 3, -4, 5)),
+            Arguments.of(Arrays.asList(5, 4, -3, 2, 1, -5, 4, 3, -2, 1)),
+            Arguments.of(Arrays.asList(1, 5, -2, 4, 3, -1, 5, 2, -4, 3))
+        );
     }
 }

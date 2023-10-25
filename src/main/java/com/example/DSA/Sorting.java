@@ -103,7 +103,7 @@ public class Sorting {
         return list;
     }
 
-    public void quickSortDivide(List<Integer> list, int left, int right) {
+    private void quickSortDivide(List<Integer> list, int left, int right) {
         if (left >= right) {
             return;
         }
@@ -112,7 +112,7 @@ public class Sorting {
         quickSortDivide(list, index+1, right);
     }
 
-    public int quickSortConquer(List<Integer> list, int left, int right) {
+    private int quickSortConquer(List<Integer> list, int left, int right) {
         int i = left;
         for (int j = left; j <= right; j ++) {
             if (list.get(j) <= list.get(right)) {
