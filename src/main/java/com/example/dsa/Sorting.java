@@ -1,6 +1,5 @@
 package com.example.dsa;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -20,9 +19,9 @@ public class Sorting {
 
     public List<Integer> selectionSort(List<Integer> list) {
         int n = list.size();
-        for (int i = 0; i < n; i ++) {
+        for (int i = 0; i < n-1; i ++) {
             int minIndex = i;
-            for (int j = i; j < n; j ++) {
+            for (int j = i+1; j < n; j ++) {
                 if (list.get(j) < list.get(minIndex)) {
                     minIndex = j;
                 }
@@ -56,45 +55,38 @@ public class Sorting {
     }
 
     private void mergeSortDivide(List<Integer> list) {
-        if (list.size() <= 1) {
+        int n = list.size();
+        if (n <= 1) {
             return;
         }
-        int n = list.size();
-        int mid = n/2;
-        List<Integer> leftList = new ArrayList<>();
-        for (int i = 0; i < mid; i ++) {
-            leftList.add(list.get(i));
-        }
-        mergeSortDivide(leftList);
-        List<Integer> rightList = new ArrayList<>();
-        for (int i = mid; i < n; i ++) {
-            rightList.add(list.get(i));
-        }
-        mergeSortDivide(rightList);
-        mergeSortConquer(list, leftList, rightList);
+        List<Integer> left = list.subList(0, n/2);
+        mergeSortDivide(left);
+        List<Integer> right = list.subList(n/2, n);
+        mergeSortDivide(right);
+        mergeSortConquer(list, left, right);
     }
 
-    private void mergeSortConquer(List<Integer> list, List<Integer> leftList, List<Integer> rightList) {
+    private void mergeSortConquer(List<Integer> list, List<Integer> left, List<Integer> right) {
         int i = 0;
         int j = 0;
         int k = 0;
-        while (i < leftList.size() && j < rightList.size()) {
-            if (leftList.get(i) < rightList.get(j)) {
-                list.set(k, leftList.get(i));
+        while (i < left.size() && j < right.size()) {
+            if (left.get(i) < right.get(j)) {
+                list.set(k, left.get(i));
                 i ++;
             } else {
-                list.set(k, rightList.get(j));
+                list.set(k, right.get(j));
                 j ++;
             }
             k ++;
         }
-        while (i < leftList.size()) {
-            list.set(k, leftList.get(i));
+        while (i < left.size()) {
+            list.set(k, left.get(i));
             i ++;
             k ++;
         }
-        while (j < rightList.size()) {
-            list.set(k, rightList.get(j));
+        while (j < right.size()) {
+            list.set(k, right.get(j));
             j ++;
             k ++;
         }
