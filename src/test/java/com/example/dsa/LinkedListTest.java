@@ -39,9 +39,8 @@ class LinkedListTest {
 
     static Stream<Arguments> generateRandomList() {
         return Stream.of(
-            Arguments.of(Arrays.asList()),
-            Arguments.of(Arrays.asList(1)),
-            Arguments.of(Arrays.asList(1, 2, 3, 4, 5))
-        );
+                Arguments.of(Arrays.asList()),
+                Arguments.of(Arrays.asList(1)),
+                Arguments.of(Arrays.asList(1, 2, 3, 4, 5)));
     }
 }

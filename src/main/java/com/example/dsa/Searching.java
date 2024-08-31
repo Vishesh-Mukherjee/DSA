@@ -4,9 +4,9 @@ import java.util.List;
 
 public class Searching {
 
-    public int linearSearch(List<Integer> list, int ele)  {
+    public int linearSearch(List<Integer> list, int ele) {
         int n = list.size();
-        for (int i = 0; i < n; i ++) {
+        for (int i = 0; i < n; i++) {
             if (list.get(i) == ele) {
                 return i;
             }
@@ -16,16 +16,16 @@ public class Searching {
 
     public int binarySearch(List<Integer> list, int ele) {
         int left = 0;
-        int right = list.size()-1;
+        int right = list.size() - 1;
         while (left <= right) {
-            int mid = (left+right)/2;
+            int mid = (left + right) / 2;
             int midEle = list.get(mid);
             if (midEle == ele) {
                 return mid;
             } else if (ele < midEle) {
-                right = mid-1;
+                right = mid - 1;
             } else {
-                left = mid+1;
+                left = mid + 1;
             }
         }
         return -1;

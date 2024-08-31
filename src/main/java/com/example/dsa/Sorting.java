@@ -7,21 +7,21 @@ public class Sorting {
 
     public List<Integer> bubbleSort(List<Integer> list) {
         int n = list.size();
-        for (int i = n-1; i > 0; i --) {
-            for (int j = 0; j < i; j ++) {
-                if (list.get(j) > list.get(j+1)) {
-                    Collections.swap(list, j, j+1);
+        for (int i = n - 1; i > 0; i--) {
+            for (int j = 0; j < i; j++) {
+                if (list.get(j) > list.get(j + 1)) {
+                    Collections.swap(list, j, j + 1);
                 }
             }
         }
         return list;
-    }        
+    }
 
     public List<Integer> selectionSort(List<Integer> list) {
         int n = list.size();
-        for (int i = 0; i < n-1; i ++) {
+        for (int i = 0; i < n - 1; i++) {
             int minIndex = i;
-            for (int j = i+1; j < n; j ++) {
+            for (int j = i + 1; j < n; j++) {
                 if (list.get(j) < list.get(minIndex)) {
                     minIndex = j;
                 }
@@ -33,18 +33,18 @@ public class Sorting {
 
     public List<Integer> insertionSort(List<Integer> list) {
         int n = list.size();
-        for (int i = 1; i < n; i ++) {
+        for (int i = 1; i < n; i++) {
             int temp = list.get(i);
-            int j = i-1;
-            while(j >= 0) {
+            int j = i - 1;
+            while (j >= 0) {
                 if (list.get(j) > temp) {
-                    list.set(j+1, list.get(j));
+                    list.set(j + 1, list.get(j));
                 } else {
                     break;
                 }
-                j --;
+                j--;
             }
-            list.set(j+1, temp);
+            list.set(j + 1, temp);
         }
         return list;
     }
@@ -59,9 +59,9 @@ public class Sorting {
         if (n <= 1) {
             return;
         }
-        List<Integer> left = list.subList(0, n/2);
+        List<Integer> left = list.subList(0, n / 2);
         mergeSortDivide(left);
-        List<Integer> right = list.subList(n/2, n);
+        List<Integer> right = list.subList(n / 2, n);
         mergeSortDivide(right);
         mergeSortConquer(list, left, right);
     }
@@ -73,27 +73,27 @@ public class Sorting {
         while (i < left.size() && j < right.size()) {
             if (left.get(i) < right.get(j)) {
                 list.set(k, left.get(i));
-                i ++;
+                i++;
             } else {
                 list.set(k, right.get(j));
-                j ++;
+                j++;
             }
-            k ++;
+            k++;
         }
         while (i < left.size()) {
             list.set(k, left.get(i));
-            i ++;
-            k ++;
+            i++;
+            k++;
         }
         while (j < right.size()) {
             list.set(k, right.get(j));
-            j ++;
-            k ++;
+            j++;
+            k++;
         }
     }
 
     public List<Integer> quickSort(List<Integer> list) {
-        quickSortDivide(list, 0, list.size()-1);
+        quickSortDivide(list, 0, list.size() - 1);
         return list;
     }
 
@@ -102,18 +102,18 @@ public class Sorting {
             return;
         }
         int index = quickSortConquer(list, left, right);
-        quickSortDivide(list, left, index-1);
-        quickSortDivide(list, index+1, right);
+        quickSortDivide(list, left, index - 1);
+        quickSortDivide(list, index + 1, right);
     }
 
     private int quickSortConquer(List<Integer> list, int left, int right) {
         int i = left;
-        for (int j = left; j <= right; j ++) {
+        for (int j = left; j <= right; j++) {
             if (list.get(j) <= list.get(right)) {
                 Collections.swap(list, i, j);
-                i ++;
+                i++;
             }
         }
-        return i-1;
+        return i - 1;
     }
 }

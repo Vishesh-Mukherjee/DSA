@@ -12,7 +12,7 @@ import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
 class SortingTest {
-    
+
     Sorting sorting;
 
     @BeforeEach
@@ -52,24 +52,24 @@ class SortingTest {
 
     static Stream<Arguments> generateRandomList() {
         return Stream.of(
-            Arguments.of(Arrays.asList()),
-            Arguments.of(Arrays.asList(1)),
-            Arguments.of(Arrays.asList(-1)),
-            Arguments.of(Arrays.asList(1, 2, 3, 4, 5)),
-            Arguments.of(Arrays.asList(5, 4, 3, 2, 1)),
-            Arguments.of(Arrays.asList(1, 5, 2, 4, 3)),
-            Arguments.of(Arrays.asList(-1, -2, -3, -4, -5)),
-            Arguments.of(Arrays.asList(-5, -4, -3, -2, -1)),
-            Arguments.of(Arrays.asList(-1, -5, -2, -4, -3)),
-            Arguments.of(Arrays.asList(1, -2, 3, -4, 5)),
-            Arguments.of(Arrays.asList(5, -4, 3, -2, 1)),
-            Arguments.of(Arrays.asList(1, -5, 2, -4, 3)),
-            Arguments.of(Arrays.asList(1, 2, -3, 4, 5, -1, 2, 3, -4, 5)),
-            Arguments.of(Arrays.asList(5, 4, -3, 2, 1, -5, 4, 3, -2, 1)),
-            Arguments.of(Arrays.asList(1, 5, -2, 4, 3, -1, 5, 2, -4, 3)),
-            Arguments.of(Arrays.asList(1, 1, 1, 1, 5, 5, 5, 2, 2, 2, 2, 4, 4, 4, 3, 3, 3)),
-            Arguments.of(Arrays.asList(Integer.MAX_VALUE, Integer.MIN_VALUE, Integer.MAX_VALUE, Integer.MIN_VALUE, Integer.MAX_VALUE)),
-            Arguments.of(Arrays.asList(1, -5, Integer.MAX_VALUE, 2, Integer.MIN_VALUE, -4, 3))
-        );
+                Arguments.of(Arrays.asList()),
+                Arguments.of(Arrays.asList(1)),
+                Arguments.of(Arrays.asList(-1)),
+                Arguments.of(Arrays.asList(1, 2, 3, 4, 5)),
+                Arguments.of(Arrays.asList(5, 4, 3, 2, 1)),
+                Arguments.of(Arrays.asList(1, 5, 2, 4, 3)),
+                Arguments.of(Arrays.asList(-1, -2, -3, -4, -5)),
+                Arguments.of(Arrays.asList(-5, -4, -3, -2, -1)),
+                Arguments.of(Arrays.asList(-1, -5, -2, -4, -3)),
+                Arguments.of(Arrays.asList(1, -2, 3, -4, 5)),
+                Arguments.of(Arrays.asList(5, -4, 3, -2, 1)),
+                Arguments.of(Arrays.asList(1, -5, 2, -4, 3)),
+                Arguments.of(Arrays.asList(1, 2, -3, 4, 5, -1, 2, 3, -4, 5)),
+                Arguments.of(Arrays.asList(5, 4, -3, 2, 1, -5, 4, 3, -2, 1)),
+                Arguments.of(Arrays.asList(1, 5, -2, 4, 3, -1, 5, 2, -4, 3)),
+                Arguments.of(Arrays.asList(1, 1, 1, 1, 5, 5, 5, 2, 2, 2, 2, 4, 4, 4, 3, 3, 3)),
+                Arguments.of(Arrays.asList(Integer.MAX_VALUE, Integer.MIN_VALUE, Integer.MAX_VALUE, Integer.MIN_VALUE,
+                        Integer.MAX_VALUE)),
+                Arguments.of(Arrays.asList(1, -5, Integer.MAX_VALUE, 2, Integer.MIN_VALUE, -4, 3)));
     }
 }
