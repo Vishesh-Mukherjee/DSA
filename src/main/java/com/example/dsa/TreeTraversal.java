@@ -9,21 +9,41 @@ public class TreeTraversal {
     public List<Integer> inOrderTraversalIteration(Node root) {
         List<Integer> result = new ArrayList<>();
         Stack<Node> stack = new Stack<>();
-        stack.addAll(getAllLefts(root));
+        stack.addAll(getLeftNodes(root));
         while (!stack.isEmpty()) {
             Node current = stack.pop();
             result.add(current.getData());
-            if (current.hasRight()) {
-                stack.addAll(getAllLefts(current.getRight()));
-            }
+            stack.addAll(getLeftNodes(current.getRight()));
         }
         return result;
     }
 
-    public List<Node> getAllLefts(Node node) {
+    public List<Integer> preOrderTraversalIteration(Node root) {
+        List<Integer> result = new ArrayList<>();
+        Stack<Node> stack = new Stack<>();
+        stack.addAll(getLeftNodes(root, result));
+        while (!stack.isEmpty()) {
+            Node current = stack.pop();
+            stack.addAll(getLeftNodes(current.getRight()));
+            getLeftNodes(current.getRight(), result);
+        }
+        return result;
+    }
+
+    public List<Node> getLeftNodes(Node node) {
         List<Node> leftNodes = new ArrayList<>();
         while (node != null) {
             leftNodes.add(node);
+            node = node.getLeft();
+        }
+        return leftNodes;
+    }
+
+    public List<Node> getLeftNodes(Node node, List<Integer> data) {
+        List<Node> leftNodes = new ArrayList<>();
+        while (node != null) {
+            leftNodes.add(node);
+            data.add(node.getData());
             node = node.getLeft();
         }
         return leftNodes;

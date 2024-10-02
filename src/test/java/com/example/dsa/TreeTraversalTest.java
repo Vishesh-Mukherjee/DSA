@@ -41,6 +41,14 @@ class TreeTraversalTest {
     }
 
     @Test
+    void testPreOrderTraversalIteration() {
+        assertThat(treeTraversal.preOrderTraversalIteration(root))
+        .isNotEmpty()
+        .hasSize(11)
+        .isEqualTo(List.of(0, 1, 3, 7, 4, 8, 2, 5, 9, 6, 10));
+    }
+
+    @Test
     void testInOrderTraversalRecursion() {
         assertThat(treeTraversal.inOrderTraversalRecursion(root))
         .isNotEmpty()
