@@ -18,4 +18,17 @@ public class Node {
         this.left = left;
         this.right = right;
     }
+
+    public boolean hasLeft() {
+        return left != null;
+    }
+
+    public boolean hasRight() {
+        return right != null;
+    }
+
+    @Override
+    public String toString() {
+        return String.valueOf(data);
+    }
 }

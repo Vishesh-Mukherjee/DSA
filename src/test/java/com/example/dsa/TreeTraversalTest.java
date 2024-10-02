@@ -33,24 +33,32 @@ class TreeTraversalTest {
     }
 
     @Test
-    void testInOrderTraversal() {
-        assertThat(treeTraversal.inOrderTraversal(root))
+    void testInOrderTraversalIteration() {
+        assertThat(treeTraversal.inOrderTraversalIteration(root))
         .isNotEmpty()
         .hasSize(11)
         .isEqualTo(List.of(7, 3, 1, 8, 4, 0, 5, 9, 2, 6, 10));
     }
 
     @Test
-    void testPreOrderTraversal() {
-        assertThat(treeTraversal.preOrderTraversal(root))
+    void testInOrderTraversalRecursion() {
+        assertThat(treeTraversal.inOrderTraversalRecursion(root))
+        .isNotEmpty()
+        .hasSize(11)
+        .isEqualTo(List.of(7, 3, 1, 8, 4, 0, 5, 9, 2, 6, 10));
+    }
+
+    @Test
+    void testPreOrderTraversalRecursion() {
+        assertThat(treeTraversal.preOrderTraversalRecursion(root))
         .isNotEmpty()
         .hasSize(11)
         .isEqualTo(List.of(0, 1, 3, 7, 4, 8, 2, 5, 9, 6, 10));
     }
 
     @Test
-    void testPostOrderTraversal() {
-        assertThat(treeTraversal.postOrderTraversal(root))
+    void testPostOrderTraversalRecursion() {
+        assertThat(treeTraversal.postOrderTraversalRecursion(root))
         .isNotEmpty()
         .hasSize(11)
         .isEqualTo(List.of(7, 3, 8, 4, 1, 9, 5, 10, 6, 2, 0));

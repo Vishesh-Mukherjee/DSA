@@ -2,10 +2,34 @@ package com.example.dsa;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Stack;
 
 public class TreeTraversal {
 
-    public List<Integer> inOrderTraversal(Node root) {
+    public List<Integer> inOrderTraversalIteration(Node root) {
+        List<Integer> result = new ArrayList<>();
+        Stack<Node> stack = new Stack<>();
+        stack.addAll(getAllLefts(root));
+        while (!stack.isEmpty()) {
+            Node current = stack.pop();
+            result.add(current.getData());
+            if (current.hasRight()) {
+                stack.addAll(getAllLefts(current.getRight()));
+            }
+        }
+        return result;
+    }
+
+    public List<Node> getAllLefts(Node node) {
+        List<Node> leftNodes = new ArrayList<>();
+        while (node != null) {
+            leftNodes.add(node);
+            node = node.getLeft();
+        }
+        return leftNodes;
+    }
+
+    public List<Integer> inOrderTraversalRecursion(Node root) {
         List<Integer> result = new ArrayList<>();
         inOrderHelper(root, result);
         return result;
@@ -20,7 +44,7 @@ public class TreeTraversal {
         inOrderHelper(node.getRight(), result);
     }
 
-    public List<Integer> preOrderTraversal(Node root) {
+    public List<Integer> preOrderTraversalRecursion(Node root) {
         List<Integer> result = new ArrayList<>();
         preOrderHelper(root, result);
         return result;
@@ -35,7 +59,7 @@ public class TreeTraversal {
         preOrderHelper(node.getRight(), result);
     }
 
-    public List<Integer> postOrderTraversal(Node root) {
+    public List<Integer> postOrderTraversalRecursion(Node root) {
         List<Integer> result = new ArrayList<>();
         postOrderHelper(root, result);
         return result;
