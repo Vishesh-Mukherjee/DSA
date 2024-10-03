@@ -1,7 +1,9 @@
 package com.example.dsa;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.Stack;
 
 public class TreeTraversal {
@@ -24,8 +26,25 @@ public class TreeTraversal {
         stack.addAll(getLeftNodes(root, result));
         while (!stack.isEmpty()) {
             Node current = stack.pop();
-            stack.addAll(getLeftNodes(current.getRight()));
-            getLeftNodes(current.getRight(), result);
+            stack.addAll(getLeftNodes(current.getRight(), result));
+        }
+        return result;
+    }
+
+    public List<Integer> postOrderTraversalIteration(Node root) {
+        List<Integer> result = new ArrayList<>();
+        Stack<Node> stack = new Stack<>();
+        Set<Node> visited = new HashSet<>();
+        stack.addAll(getLeftNodes(root));
+        while (!stack.isEmpty()) {
+            Node current = stack.pop();
+            if (current.hasRight() && !visited.contains(current)) {
+                visited.add(current);
+                stack.push(current);
+                stack.addAll(getLeftNodes(current.getRight()));
+            } else {
+                result.add(current.getData());
+            }
         }
         return result;
     }
