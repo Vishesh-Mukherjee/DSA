@@ -1,6 +1,7 @@
 package com.example.dsa.algorithm;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.entry;
 
 import java.util.List;
 
@@ -11,23 +12,35 @@ import com.example.dsa.util.Node;
 
 class TreeTraversalTest {
 
+    Node n1;
+    Node n2;
+    Node n3;
+    Node n4;
+    Node n5;
+    Node n6;
+    Node n7;
+    Node n8;
+    Node n9;
+    Node n10;
+
     Node root;
+
     TreeTraversal treeTraversal;
 
     @BeforeEach
     void init() {
-        Node n7 = new Node(7, null, null);
-        Node n8 = new Node(8, null, null);
-        Node n9 = new Node(9, null, null);
-        Node n10 = new Node(10, null, null);
+        n7 = new Node(7, null, null);
+        n8 = new Node(8, null, null);
+        n9 = new Node(9, null, null);
+        n10 = new Node(10, null, null);
 
-        Node n3 = new Node(3, n7, null);
-        Node n4 = new Node(4, n8, null);
-        Node n5 = new Node(5, null, n9);
-        Node n6 = new Node(6, null, n10);
+        n3 = new Node(3, n7, null);
+        n4 = new Node(4, n8, null);
+        n5 = new Node(5, null, n9);
+        n6 = new Node(6, null, n10);
 
-        Node n1 = new Node(1, n3, n4);
-        Node n2 = new Node(2, n5, n6);
+        n1 = new Node(1, n3, n4);
+        n2 = new Node(2, n5, n6);
 
         root = new Node(0, n1, n2);
 
@@ -80,6 +93,36 @@ class TreeTraversalTest {
         .isNotEmpty()
         .hasSize(11)
         .isEqualTo(List.of(7, 3, 8, 4, 1, 9, 5, 10, 6, 2, 0));
+    }
+
+    @Test
+    void testGetTreeHeight() {
+        Node n11 = new Node(11);
+        n9.setLeft(n11);
+        assertThat(treeTraversal.getTreeHeight(root)).isEqualTo(5);
+    }
+
+    @Test
+    void testGetNodesByHeight() {
+        Node n11 = new Node(11);
+        n9.setLeft(n11);
+        assertThat(treeTraversal.getNodesByHeight(root))
+        .isNotEmpty()
+        .hasSize(12)
+        .contains(
+            entry(root, 1),
+            entry(n1,2),
+            entry(n2, 2),
+            entry(n3, 3),
+            entry(n4, 3),
+            entry(n5, 3),
+            entry(n6, 3),
+            entry(n7, 4),
+            entry(n8, 4),
+            entry(n9, 4),
+            entry(n10, 4),
+            entry(n11, 5)
+        );
     }
 
 }

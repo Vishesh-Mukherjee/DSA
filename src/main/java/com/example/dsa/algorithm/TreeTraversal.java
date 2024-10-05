@@ -1,8 +1,10 @@
 package com.example.dsa.algorithm;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.Stack;
 
@@ -14,11 +16,11 @@ public class TreeTraversal {
     public List<Integer> inOrderTraversalIteration(Node root) {
         List<Integer> result = new ArrayList<>();
         Stack<Node> stack = new Stack<>();
-        stack.addAll(getLeftData(root).getLeftNodes());
+        stack.addAll(getLeftData(root, 0).getLeftNodes());
         while (!stack.isEmpty()) {
-            Node current = stack.pop();
-            result.add(current.getValue());
-            stack.addAll(getLeftData(current.getRight()).getLeftNodes());
+            Node currentNode = stack.pop();
+            result.add(currentNode.getValue());
+            stack.addAll(getLeftData(currentNode.getRight(), 0).getLeftNodes());
         }
         return result;
     }
@@ -26,12 +28,12 @@ public class TreeTraversal {
     public List<Integer> preOrderTraversalIteration(Node root) {
         List<Integer> result = new ArrayList<>();
         Stack<Node> stack = new Stack<>();
-        LeftData leftData = getLeftData(root);
+        LeftData leftData = getLeftData(root, 0);
         stack.addAll(leftData.getLeftNodes());
         result.addAll(leftData.getLeftValues());
         while (!stack.isEmpty()) {
-            Node current = stack.pop();
-            LeftData currentLeftData = getLeftData(current.getRight());
+            Node currentNode = stack.pop();
+            LeftData currentLeftData = getLeftData(currentNode.getRight(), 0);
             stack.addAll(currentLeftData.getLeftNodes());
             result.addAll(currentLeftData.getLeftValues());
         }
@@ -41,30 +43,34 @@ public class TreeTraversal {
     public List<Integer> postOrderTraversalIteration(Node root) {
         List<Integer> result = new ArrayList<>();
         Stack<Node> stack = new Stack<>();
-        Set<Node> visited = new HashSet<>();
-        stack.addAll(getLeftData(root).getLeftNodes());
+        Set<Node> visitedNodes = new HashSet<>();
+        stack.addAll(getLeftData(root, 0).getLeftNodes());
         while (!stack.isEmpty()) {
-            Node current = stack.pop();
-            if (current.hasRight() && !visited.contains(current)) {
-                visited.add(current);
-                stack.push(current);
-                stack.addAll(getLeftData(current.getRight()).getLeftNodes());
+            Node currentNode = stack.pop();
+            if (currentNode.hasRight() && !visitedNodes.contains(currentNode)) {
+                visitedNodes.add(currentNode);
+                stack.push(currentNode);
+                stack.addAll(getLeftData(currentNode.getRight(), 0).getLeftNodes());
             } else {
-                result.add(current.getValue());
+                result.add(currentNode.getValue());
             }
         }
         return result;
     }
 
-    private LeftData getLeftData(Node node) {
+    private LeftData getLeftData(Node node, int baseHeight) {
         List<Node> leftNodes = new ArrayList<>();
-        List<Integer> leftData = new ArrayList<>();
+        List<Integer> leftValues = new ArrayList<>();
+        int count = 0;
+        Map<Node, Integer> nodeHeight = new HashMap<>();
         while (node != null) {
+            count ++;
             leftNodes.add(node);
-            leftData.add(node.getValue());
+            leftValues.add(node.getValue());
+            nodeHeight.put(node, baseHeight+count);
             node = node.getLeft();
         }
-        return new LeftData(leftNodes, leftData);
+        return new LeftData(leftNodes, leftValues, nodeHeight, count);
     }
 
     public List<Integer> inOrderTraversalRecursion(Node root) {
@@ -111,5 +117,38 @@ public class TreeTraversal {
         postOrderHelper(node.getRight(), result);
         result.add(node.getValue());
     }
+
+    public Map<Node, Integer> getNodesByHeight(Node root)  {
+        Stack<Node> stack = new Stack<>();
+        LeftData leftData = getLeftData(root, 0);
+        stack.addAll(leftData.getLeftNodes());
+        Map<Node, Integer> nodesByHeight = leftData.getNodesByHeight();
+        while (!stack.isEmpty()) {
+            Node currentNode = stack.pop();
+            LeftData currentLeftData = getLeftData(currentNode.getRight(), nodesByHeight.get(currentNode));
+            stack.addAll(currentLeftData.getLeftNodes());
+            nodesByHeight.putAll(currentLeftData.getNodesByHeight());
+        }
+        return nodesByHeight;
+   }
+
+    public int getTreeHeight(Node root)  {
+        Stack<Node> stack = new Stack<>();
+        LeftData leftData = getLeftData(root, 0);
+        int maxHeight = leftData.getLength();
+        stack.addAll(leftData.getLeftNodes());
+        Map<Node, Integer> nodeHeight = leftData.getNodesByHeight();
+        while (!stack.isEmpty()) {
+            Node currentNode = stack.pop();
+            Integer baseHeight = nodeHeight.get(currentNode);
+            LeftData currentLeftData = getLeftData(currentNode.getRight(), baseHeight);
+            stack.addAll(currentLeftData.getLeftNodes());
+            nodeHeight.putAll(currentLeftData.getNodesByHeight());
+            if (baseHeight + currentLeftData.getLength() > maxHeight) {
+                maxHeight = baseHeight + currentLeftData.getLength();
+            }
+        }
+        return maxHeight;
+   }
 
 }
