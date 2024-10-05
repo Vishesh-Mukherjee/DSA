@@ -3,8 +3,10 @@ package com.example.dsa.algorithm;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Queue;
 import java.util.Set;
 import java.util.Stack;
 
@@ -149,6 +151,23 @@ public class TreeTraversal {
             }
         }
         return maxHeight;
+   }
+
+   public List<Integer> levelOrderTraversal(Node root) {
+        List<Integer> result = new ArrayList<>(); 
+        Queue<Node> queue = new LinkedList<>();
+        queue.add(root);
+        while (!queue.isEmpty()) {
+            Node currentNode = queue.poll();
+            result.add(currentNode.getValue());
+            if (currentNode.hasLeft()) {
+                queue.add(currentNode.getLeft());
+            }
+            if (currentNode.hasRight()) {
+                queue.add(currentNode.getRight());
+            }
+        }
+        return result;
    }
 
 }

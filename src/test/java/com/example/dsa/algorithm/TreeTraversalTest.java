@@ -125,5 +125,13 @@ class TreeTraversalTest {
         );
     }
 
+    @Test
+    void testLevelOrderTraversal() {
+        assertThat(treeTraversal.levelOrderTraversal(root))
+        .isNotEmpty()
+        .hasSize(11)
+        .isEqualTo(List.of(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10));
+    }
+
 }
 
