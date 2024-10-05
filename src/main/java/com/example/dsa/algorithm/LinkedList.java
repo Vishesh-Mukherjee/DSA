@@ -1,7 +1,9 @@
-package com.example.dsa;
+package com.example.dsa.algorithm;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import com.example.dsa.util.Node;
 
 import lombok.Data;
 
@@ -42,7 +44,7 @@ public class LinkedList {
         List<Integer> list = new ArrayList<>();
         Node pointer = head;
         while (pointer != null) {
-            list.add(pointer.getData());
+            list.add(pointer.getValue());
             pointer = pointer.getNext();
         }
         return list;

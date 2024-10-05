@@ -1,4 +1,4 @@
-package com.example.dsa;
+package com.example.dsa.algorithm;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -6,16 +6,19 @@ import java.util.List;
 import java.util.Set;
 import java.util.Stack;
 
+import com.example.dsa.util.LeftData;
+import com.example.dsa.util.Node;
+
 public class TreeTraversal {
 
     public List<Integer> inOrderTraversalIteration(Node root) {
         List<Integer> result = new ArrayList<>();
         Stack<Node> stack = new Stack<>();
-        stack.addAll(getLeftNodes(root));
+        stack.addAll(getLeftData(root).getLeftNodes());
         while (!stack.isEmpty()) {
             Node current = stack.pop();
-            result.add(current.getData());
-            stack.addAll(getLeftNodes(current.getRight()));
+            result.add(current.getValue());
+            stack.addAll(getLeftData(current.getRight()).getLeftNodes());
         }
         return result;
     }
@@ -23,10 +26,14 @@ public class TreeTraversal {
     public List<Integer> preOrderTraversalIteration(Node root) {
         List<Integer> result = new ArrayList<>();
         Stack<Node> stack = new Stack<>();
-        stack.addAll(getLeftNodes(root, result));
+        LeftData leftData = getLeftData(root);
+        stack.addAll(leftData.getLeftNodes());
+        result.addAll(leftData.getLeftValues());
         while (!stack.isEmpty()) {
             Node current = stack.pop();
-            stack.addAll(getLeftNodes(current.getRight(), result));
+            LeftData currentLeftData = getLeftData(current.getRight());
+            stack.addAll(currentLeftData.getLeftNodes());
+            result.addAll(currentLeftData.getLeftValues());
         }
         return result;
     }
@@ -35,37 +42,29 @@ public class TreeTraversal {
         List<Integer> result = new ArrayList<>();
         Stack<Node> stack = new Stack<>();
         Set<Node> visited = new HashSet<>();
-        stack.addAll(getLeftNodes(root));
+        stack.addAll(getLeftData(root).getLeftNodes());
         while (!stack.isEmpty()) {
             Node current = stack.pop();
             if (current.hasRight() && !visited.contains(current)) {
                 visited.add(current);
                 stack.push(current);
-                stack.addAll(getLeftNodes(current.getRight()));
+                stack.addAll(getLeftData(current.getRight()).getLeftNodes());
             } else {
-                result.add(current.getData());
+                result.add(current.getValue());
             }
         }
         return result;
     }
 
-    public List<Node> getLeftNodes(Node node) {
+    private LeftData getLeftData(Node node) {
         List<Node> leftNodes = new ArrayList<>();
+        List<Integer> leftData = new ArrayList<>();
         while (node != null) {
             leftNodes.add(node);
+            leftData.add(node.getValue());
             node = node.getLeft();
         }
-        return leftNodes;
-    }
-
-    public List<Node> getLeftNodes(Node node, List<Integer> data) {
-        List<Node> leftNodes = new ArrayList<>();
-        while (node != null) {
-            leftNodes.add(node);
-            data.add(node.getData());
-            node = node.getLeft();
-        }
-        return leftNodes;
+        return new LeftData(leftNodes, leftData);
     }
 
     public List<Integer> inOrderTraversalRecursion(Node root) {
@@ -79,7 +78,7 @@ public class TreeTraversal {
             return;
         }
         inOrderHelper(node.getLeft(), result);
-        result.add(node.getData());
+        result.add(node.getValue());
         inOrderHelper(node.getRight(), result);
     }
 
@@ -93,7 +92,7 @@ public class TreeTraversal {
         if (node == null) {
             return;
         }
-        result.add(node.getData());
+        result.add(node.getValue());
         preOrderHelper(node.getLeft(), result);
         preOrderHelper(node.getRight(), result);
     }
@@ -110,7 +109,7 @@ public class TreeTraversal {
         }
         postOrderHelper(node.getLeft(), result);
         postOrderHelper(node.getRight(), result);
-        result.add(node.getData());
+        result.add(node.getValue());
     }
 
 }

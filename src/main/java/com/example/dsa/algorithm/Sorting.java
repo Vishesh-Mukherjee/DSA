@@ -1,4 +1,4 @@
-package com.example.dsa;
+package com.example.dsa.algorithm;
 
 import java.util.Collections;
 import java.util.List;

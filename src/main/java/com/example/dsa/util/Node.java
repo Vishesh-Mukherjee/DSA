@@ -1,20 +1,20 @@
-package com.example.dsa;
+package com.example.dsa.util;
 
 import lombok.Data;
 
 @Data
 public class Node {
-    private int data;
+    private int value;
     private Node left;
     private Node right;
     private Node next;
 
     public Node(int data) {
-        this.data = data;
+        this.value = data;
     }
 
     public Node(int data, Node left, Node right) {
-        this.data = data;
+        this.value = data;
         this.left = left;
         this.right = right;
     }
@@ -29,6 +29,6 @@ public class Node {
 
     @Override
     public String toString() {
-        return String.valueOf(data);
+        return String.valueOf(value);
     }
 }
