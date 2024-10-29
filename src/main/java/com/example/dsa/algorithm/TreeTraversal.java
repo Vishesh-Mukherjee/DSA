@@ -170,4 +170,35 @@ public class TreeTraversal {
         return result;
    }
 
+   public List<Integer> zigZagTraversal(Node root) {
+        List<Integer> result = new ArrayList<>();
+        LinkedList<Node> queue = new LinkedList<>();
+        Stack<Node> stack = new Stack<>();
+        queue.add(root);
+        while (!queue.isEmpty() || !stack.empty()) {
+            while (!queue.isEmpty()) {
+                Node node = queue.remove();
+                result.add(node.getValue());
+                if (node.hasLeft()) {
+                    stack.push(node.getLeft());
+                }
+                if (node.hasRight())  {
+                    stack.push(node.getRight());
+                }
+            }
+            while (!stack.isEmpty()) {
+                Node node = stack.pop();
+                result.add(node.getValue());
+                if (node.hasRight())  {
+                    queue.push(node.getRight());
+                }
+                if (node.hasLeft()) {
+                    queue.push(node.getLeft());
+                }
+
+            }
+        }
+        return result;
+   }
+
 }

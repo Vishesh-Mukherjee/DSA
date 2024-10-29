@@ -133,5 +133,13 @@ class TreeTraversalTest {
         .isEqualTo(List.of(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10));
     }
 
+    @Test
+    void testZigZagTraversal() {
+        assertThat(treeTraversal.zigZagTraversal(root))
+        .isNotEmpty()
+        .hasSize(11)
+        .isEqualTo(List.of(0, 2, 1, 3, 4, 5, 6, 10, 9, 8, 7));
+    }
+
 }
 
