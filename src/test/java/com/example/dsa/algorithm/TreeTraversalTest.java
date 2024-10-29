@@ -187,5 +187,17 @@ class TreeTraversalTest {
         .isEqualTo(List.of(0, 1, 3, 7, 11, 13, 16));
     }
 
+    @Test
+    void testBinaryTree() {
+        Node rootNode = treeTraversal.createBinaryTree(List.of(4, 2, 1, 3, 6, 5, 7));
+        assertThat(rootNode.getValue()).isEqualTo(4);
+        assertThat(rootNode.getLeft().getValue()).isEqualTo(2);
+        assertThat(rootNode.getLeft().getLeft().getValue()).isEqualTo(1);
+        assertThat(rootNode.getLeft().getRight().getValue()).isEqualTo(3);
+        assertThat(rootNode.getRight().getValue()).isEqualTo(6);
+        assertThat(rootNode.getRight().getLeft().getValue()).isEqualTo(5);
+        assertThat(rootNode.getRight().getRight().getValue()).isEqualTo(7);
+    }
+
 }
 

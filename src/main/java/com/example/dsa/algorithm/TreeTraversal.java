@@ -275,4 +275,31 @@ public class TreeTraversal {
         return result;
    }
 
+   private void addNode(Node root, Node newNode) {
+        Node currentNode = root;
+        while (true) {
+            if (newNode.getValue() <= currentNode.getValue()) {
+                if (!currentNode.hasLeft()) {
+                    currentNode.setLeft(newNode);
+                    return;
+                }
+                currentNode = currentNode.getLeft();
+            } else {
+                if (!currentNode.hasRight()) {
+                    currentNode.setRight(newNode);
+                    return;
+                }
+                currentNode = currentNode.getRight();
+            }
+        }
+   }
+
+   public Node createBinaryTree(List<Integer> elements) {
+       Node root = new Node(elements.get(0));
+       for (int i = 1; i < elements.size(); i ++) {
+        addNode(root, new Node(elements.get(i)));
+       }
+        return root;
+   }
+
 }
