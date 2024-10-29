@@ -236,4 +236,43 @@ public class TreeTraversal {
         return result;
    }
 
+   public List<Integer> leftView(Node root) {
+        List<Integer> result = new ArrayList<>();
+        LinkedList<Node> q1 = new LinkedList<>();
+        LinkedList<Node> q2 = new LinkedList<>();
+        q1.push(root);
+        boolean flag = true;
+        while (!q1.isEmpty() || !q2.isEmpty()) {
+            while (!q1.isEmpty()) {
+                Node node = q1.remove();
+                if (flag) {
+                    result.add(node.getValue());
+                    flag = false;
+                }
+                if (node.hasLeft()) {
+                    q2.add(node.getLeft());
+                }
+                if (node.hasRight()) {
+                    q2.add(node.getRight());
+                }
+            }
+            flag = true;
+            while (!q2.isEmpty()) {
+                Node node = q2.remove();
+                if (flag) {
+                    result.add(node.getValue());
+                    flag = false;
+                }
+                if (node.hasLeft()) {
+                    q1.add(node.getLeft());
+                }
+                if (node.hasRight()) {
+                    q1.add(node.getRight());
+                }
+            }
+            flag = true;
+        }
+        return result;
+   }
+
 }

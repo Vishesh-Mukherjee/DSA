@@ -168,5 +168,24 @@ class TreeTraversalTest {
         .isEqualTo(List.of(0, 1, 2, 5, 6, 11, 12, 13, 14));
     }
 
+    @Test
+    void testLeftView() {
+        Node n16 = new Node(16, null, null);
+        Node n15 = new Node(15, null, n16);
+        Node n14 = new Node(14, null, n15);
+        Node n13 = new Node(13, null, null);
+        Node n12 = new Node(12, n13, null);
+        Node n11 = new Node(11, null, null);
+
+        n9.setLeft(n11);
+        n9.setRight(n12);
+        n10.setRight(n14);
+
+        assertThat(treeTraversal.leftView(root))
+        .isNotEmpty()
+        .hasSize(7)
+        .isEqualTo(List.of(0, 1, 3, 7, 11, 13, 16));
+    }
+
 }
 
