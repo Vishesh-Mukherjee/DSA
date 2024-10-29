@@ -8,6 +8,7 @@ public class Node {
     private Node left;
     private Node right;
     private Node next;
+    private int position;
 
     public Node(int data) {
         this.value = data;

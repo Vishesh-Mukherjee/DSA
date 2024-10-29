@@ -200,5 +200,40 @@ public class TreeTraversal {
         }
         return result;
    }
+   /**
+    * The horizontal distance of the left child of a node x is equal to a horizontal distance of x minus 1,
+    * and that of a right child is the horizontal distance of x plus 1.
+    * @param root
+    * @return
+    */
+   public List<Integer> topView(Node root) {
+        List<Integer> result = new ArrayList<>();
+        LinkedList<Node> queue = new LinkedList<>();
+        int currentPositive = 0;
+        int currentNegative = 0;
+        root.setPosition(0);
+        queue.push(root);
+        result.add(root.getValue());
+        while (!queue.isEmpty()) {
+            Node node = queue.remove();
+            if (node.getPosition() > currentPositive) {
+                result.add(node.getValue());
+                currentPositive = node.getPosition();
+            }
+            if (node.getPosition() < currentNegative) {
+                result.add(node.getValue());
+                currentNegative = node.getPosition();
+            }
+            if (node.hasLeft()) {
+                node.getLeft().setPosition(node.getPosition() - 1);
+                queue.add(node.getLeft());
+            }
+            if (node.hasRight()) {
+                node.getRight().setPosition(node.getPosition() + 1);
+                queue.add(node.getRight());
+            }
+        }
+        return result;
+   }
 
 }

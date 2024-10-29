@@ -141,5 +141,32 @@ class TreeTraversalTest {
         .isEqualTo(List.of(0, 2, 1, 3, 4, 5, 6, 10, 9, 8, 7));
     }
 
+    @Test
+    void testTopView() {
+        Node tvn13 = new Node(13, null, null);
+        Node tvn14 = new Node(14, null, null);
+        Node tvn11 = new Node(11, tvn13, null);
+        Node tvn12 = new Node(12, null, tvn14);
+
+        Node tvn9 = new Node(9, tvn11, null);
+        Node tvn10 = new Node(10, null, tvn12);
+        Node tvn7 = new Node(7, tvn9, null);
+        Node tvn8 = new Node(8, null, tvn10);
+
+        Node tvn3 = new Node(3, tvn7, null);
+        Node tvn4 = new Node(4, tvn7, tvn8);
+        Node tvn5 = new Node(5, null, null);
+        Node tvn6 = new Node(6, null, null);
+
+        Node tvn1 = new Node(1, tvn5, tvn3);
+        Node tvn2 = new Node(2, tvn4, tvn6);
+
+        Node tvnRoot = new Node(0, tvn1, tvn2);
+        assertThat(treeTraversal.topView(tvnRoot))
+        .isNotEmpty()
+        .hasSize(9)
+        .isEqualTo(List.of(0, 1, 2, 5, 6, 11, 12, 13, 14));
+    }
+
 }
 
